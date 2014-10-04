@@ -89,7 +89,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       elseif string.match(url, "mw2%.google%.com") then
         local photo = string.match(url, "static%.panoramio%.com/[^/]+/photos/[^/]+/(.+)")
       end
-      if photo then
+      if string.match(photo, "[0-9]") then
         local storage_mini_square = "http://static.panoramio.com.storage.googleapis.com/photos/mini_square/"..photo
         if downloaded[storage_mini_square] ~= true then
           table.insert(urls, { url=storage_mini_square })

@@ -77,7 +77,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local html = nil
   
   if item_type == "image99pack" then
-    if (string.match(url, "/photos/") and string.match(url, "/"..item_type.."[0-9][0-9]%.")) then
+    if (string.match(url, "/photos/") and string.match(url, "/"..item_type..)) then
       if string.match(url, "static%.panoramio%.com") then
         local photo = string.match(url, "static%.panoramio%.com/photos/[^/]+/(.+)")
       elseif string.match(url, "static%.panoramio%.com%.storage%.googleapis%.com") then
@@ -238,7 +238,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         table.insert(urls, { url=baseurl })
       end
     end
-    if string.match(url, "/"..item_type.."[0-9][0-9]/")
+    if string.match(url, "/"..item_type..)
       or string.match(url, "/"..item_type.."[0-9][0-9]&") 
       or string.match(url, "/"..item_type.."[0-9][0-9]%?") then
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do

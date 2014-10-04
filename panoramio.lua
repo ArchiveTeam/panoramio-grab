@@ -42,7 +42,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   end
   
   if item_type == "image99pack" then
-    if string.match(url, "/"..item_type.."[0-9][0-9]/")
+    if string.match(url, "/"..item_type.."[0-9][0-9]")
       or string.match(url, "/css/")
       or string.match(url, "/ajax/")
       or string.match(url, "/js/")

@@ -60,6 +60,7 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
       or string.match(customurl, "mw2%.google%.com")
       or string.match(customurl, "apis%.google%.com")
       or string.match(customurl, "static%.panoramio%.com")
+      or string.match(customurl, "static%.panoramio%.com%.storage%.googleapis%.com")
       or string.match(customurl, "googleusercontent%.com")
       or string.match(customurl, "googleapis%.com") then
       return true
@@ -262,6 +263,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "mw2%.google%.com")
           or string.match(customurl, "apis%.google%.com")
           or string.match(customurl, "static%.panoramio%.com")
+          or string.match(customurl, "static%.panoramio%.com%.storage%.googleapis%.com")
           or string.match(customurl, "googleusercontent%.com")
           or string.match(customurl, "googleapis%.com") then
           if downloaded[customurl] ~= true then

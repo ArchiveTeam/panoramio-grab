@@ -79,6 +79,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     if (string.match(url, "/photos/") and string.match(url, "/"..item_type.."[0-9][0-9]/")) then
       if string.match(url, "static%.panoramio%.com") then
         local photo = string.match(url, "static%.panoramio%.com/photos/[^/]+/(.+)")
+      if string.match(url, "www%.panoramio%.com") then
+        local photo = string.match(url, "www%.panoramio%.com/photos/[^/]+/(.+)")
       elseif string.match(url, "mw2%.google%.com") then
         local photo = string.match(url, "static%.panoramio%.com/[^/]+/photos/[^/]+/(.+)")
       end
@@ -106,6 +108,30 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         local static_original = "http://static.panoramio.com/photos/original/"..photo
         if downloaded[static_original] ~= true then
           table.insert(urls, { url=static_original })
+        end
+        local www_mini_square = "http://www.panoramio.com/photos/mini_square/"..photo
+        if downloaded[www_mini_square] ~= true then
+          table.insert(urls, { url=www_mini_square })
+        end
+        local www_square = "http://www.panoramio.com/photos/square/"..photo
+        if downloaded[www_square] ~= true then
+          table.insert(urls, { url=www_square })
+        end
+        local www_small = "http://www.panoramio.com/photos/small/"..photo
+        if downloaded[www_small] ~= true then
+          table.insert(urls, { url=www_small })
+        end
+        local www_medium = "http://www.panoramio.com/photos/medium/"..photo
+        if downloaded[www_medium] ~= true then
+          table.insert(urls, { url=www_medium })
+        end
+        local www_large = "http://www.panoramio.com/photos/large/"..photo
+        if downloaded[www_large] ~= true then
+          table.insert(urls, { url=www_large })
+        end
+        local www_original = "http://www.panoramio.com/photos/original/"..photo
+        if downloaded[www_original] ~= true then
+          table.insert(urls, { url=www_original })
         end
         local mw3_mini_square = "http://mw2.google.com/mw-panoramio/photos/mini_square/"..photo
         if downloaded[mw3_mini_square] ~= true then
@@ -246,7 +272,13 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     downloaded[url.url] = true
   end
   
-  if string.match(url["url"], "with_photo_id") then
+  if string.match(url["url"], "with_photo_id")
+    or string.match(url["url"], "www%.panoramio%.com/photos/mini_square/") 
+    or string.match(url["url"], "www%.panoramio%.com/photos/square/") 
+    or string.match(url["url"], "www%.panoramio%.com/photos/small/") 
+    or string.match(url["url"], "www%.panoramio%.com/photos/medium/") 
+    or string.match(url["url"], "www%.panoramio%.com/photos/large/") 
+    or string.match(url["url"], "www%.panoramio%.com/photos/original/") then
     wget.actions.EXIT
   elseif status_code >= 500 or
     (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then

@@ -295,12 +295,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
-        if string.match(customurlnf, "//") then
-          local newurl = string.gsub(customurlnf, "//", "http://")
-          if downloaded[newurl] ~= true then
-            table.insert(urls, { url=newurl })
-          end
-        elseif string.match(customurlnf, "/"..item_value.."[0-9][0-9]")
+--        if string.match(customurlnf, "//") then
+--          local newurl = string.gsub(customurlnf, "//", "http://")
+--          if downloaded[newurl] ~= true then
+--            table.insert(urls, { url=newurl })
+--          end
+        if string.match(customurlnf, "/"..item_value.."[0-9][0-9]")
           or string.match(customurlnf, "/css/")
           or string.match(customurlnf, "/ajax/")
           or string.match(customurlnf, "/js/")
@@ -326,12 +326,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         end
       end
       for customurlnf in string.gmatch(html, "'(/[^']+)'") do
-        if string.match(customurlnf, "//") then
-          local newurl = string.gsub(customurlnf, "//", "http://")
-          if downloaded[newurl] ~= true then
-            table.insert(urls, { url=newurl })
-          end
-        elseif string.match(customurlnf, "/"..item_value.."[0-9][0-9]")
+--        if string.match(customurlnf, "//") then
+--          local newurl = string.gsub(customurlnf, "//", "http://")
+--          if downloaded[newurl] ~= true then
+--            table.insert(urls, { url=newurl })
+--          end
+        if string.match(customurlnf, "/"..item_value.."[0-9][0-9]")
           or string.match(customurlnf, "/css/")
           or string.match(customurlnf, "/ajax/")
           or string.match(customurlnf, "/js/")

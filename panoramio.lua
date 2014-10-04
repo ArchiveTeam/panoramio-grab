@@ -41,7 +41,33 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
     return false
   end
   
-  
+  if item_type == "image99pack" then
+    if string.match(customurl, "/"..item_type.."[0-9][0-9]/")
+      or string.match(customurl, "/css/")
+      or string.match(customurl, "/ajax/")
+      or string.match(customurl, "/js/")
+      or string.match(customurl, "/js_lib/")
+      or string.match(customurl, "/img/")
+      or string.match(customurl, "/wapi/")
+      or string.match(customurl, "/offensive/")
+      or string.match(customurl, "%.jpg")
+      or string.match(customurl, "%.jpeg")
+      or string.match(customurl, "%.png")
+      or string.match(customurl, "%.gif")
+      or string.match(customurl, "%.css")
+      or string.match(customurl, "%.js")
+      or string.match(customurl, "gstatic%.com")
+      or string.match(customurl, "mw2%.google%.com")
+      or string.match(customurl, "apis%.google%.com")
+      or string.match(customurl, "static%.panoramio%.com")
+      or string.match(customurl, "googleusercontent%.com")
+      or string.match(customurl, "googleapis%.com") then
+      return true
+    else
+      return false
+    end
+  end
+    
 end
 
 
@@ -49,7 +75,159 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
   local html = nil
   
-  
+  if item_type == "image99pack" then
+    if (string.match(url, "/photos/") and string.match(url, "/"..item_type.."[0-9][0-9]/")) then
+      if string.match(url, "static%.panoramio%.com") then
+        local photo = string.match(url, "static%.panoramio%.com/photos/[^/]+/(.+)")
+      elseif string.match(url, "mw2%.google%.com") then
+        local photo = string.match(url, "static%.panoramio%.com/[^/]+/photos/[^/]+/(.+)")
+      end
+      if photo then
+        local static_mini_square = "http://static.panoramio.com/photos/mini_square/"..photo
+        if downloaded[static_mini_square] ~= true then
+          table.insert(urls, { url=static_mini_square })
+        end
+        local static_square = "http://static.panoramio.com/photos/square/"..photo
+        if downloaded[static_square] ~= true then
+          table.insert(urls, { url=static_square })
+        end
+        local static_small = "http://static.panoramio.com/photos/small/"..photo
+        if downloaded[static_small] ~= true then
+          table.insert(urls, { url=static_small })
+        end
+        local static_medium = "http://static.panoramio.com/photos/medium/"..photo
+        if downloaded[static_medium] ~= true then
+          table.insert(urls, { url=static_medium })
+        end
+        local static_large = "http://static.panoramio.com/photos/large/"..photo
+        if downloaded[static_large] ~= true then
+          table.insert(urls, { url=static_large })
+        end
+        local static_original = "http://static.panoramio.com/photos/original/"..photo
+        if downloaded[static_original] ~= true then
+          table.insert(urls, { url=static_original })
+        end
+        local mw3_mini_square = "http://mw2.google.com/mw-panoramio/photos/mini_square/"..photo
+        if downloaded[mw3_mini_square] ~= true then
+          table.insert(urls, { url=mw3_mini_square })
+        end
+        local mw3_square = "http://mw2.google.com/mw-panoramio/photos/square/"..photo
+        if downloaded[mw3_square] ~= true then
+          table.insert(urls, { url=mw3_square })
+        end
+        local mw3_small = "http://mw2.google.com/mw-panoramio/photos/small/"..photo
+        if downloaded[mw3_small] ~= true then
+          table.insert(urls, { url=mw3_small })
+        end
+        local mw3_medium = "http://mw2.google.com/mw-panoramio/photos/medium/"..photo
+        if downloaded[mw3_medium] ~= true then
+          table.insert(urls, { url=mw3_medium })
+        end
+      end
+    end
+    for baseurl in string.gmatch(url, "(http[s]?://static%.panoramio%.com/avatars/user/[0-9]+.jpg)%?v=") do
+      if downloaded[baseurl] ~= true then
+        table.insert(urls, { url=baseurl })
+      end
+    end
+    if string.match(url, "/"..item_type.."[0-9][0-9]/") then
+      for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
+        if string.match(customurl, "/"..item_type.."[0-9][0-9]/")
+          or string.match(customurl, "/css/")
+          or string.match(customurl, "/ajax/")
+          or string.match(customurl, "/js/")
+          or string.match(customurl, "/js_lib/")
+          or string.match(customurl, "/img/")
+          or string.match(customurl, "/wapi/")
+          or string.match(customurl, "/map/")
+          or string.match(customurl, "/offensive/")
+          or string.match(customurl, "/map_photo/")
+          or string.match(customurl, "/photo_counter_snippet")
+          or string.match(customurl, "with_photo_id")
+          or string.match(customurl, "/photo_explorer")
+          or string.match(customurl, "%.jpg")
+          or string.match(customurl, "%.jpeg")
+          or string.match(customurl, "%.png")
+          or string.match(customurl, "%.gif")
+          or string.match(customurl, "%.css")
+          or string.match(customurl, "%.js")
+          or string.match(customurl, "gstatic%.com")
+          or string.match(customurl, "mw2%.google%.com")
+          or string.match(customurl, "apis%.google%.com")
+          or string.match(customurl, "static%.panoramio%.com")
+          or string.match(customurl, "googleusercontent%.com")
+          or string.match(customurl, "googleapis%.com") then
+          if downloaded[customurl] ~= true then
+            table.insert(urls, { url=customurl })
+          end
+        end
+      end
+      for customurlnf in string.gmatch(html, '"(/[^"]+)"') do
+        if string.match(customurlnf, "//") then
+          local newurl = string.gsub(customurlnf, "//", "http://")
+          if downloaded[newurl] ~= true then
+            table.insert(urls, { url=newurl })
+          end
+        elseif string.match(customurlnf, "/"..item_type.."[0-9][0-9]/")
+          or string.match(customurlnf, "/css/")
+          or string.match(customurlnf, "/ajax/")
+          or string.match(customurlnf, "/js/")
+          or string.match(customurlnf, "/js_lib/")
+          or string.match(customurlnf, "/img/")
+          or string.match(customurlnf, "/wapi/")
+          or string.match(customurlnf, "/map/")
+          or string.match(customurlnf, "/offensive/")
+          or string.match(customurlnf, "/map_photo/")
+          or string.match(customurlnf, "/photo_counter_snippet")
+          or string.match(customurlnf, "with_photo_id")
+          or string.match(customurlnf, "/photo_explorer")
+          or string.match(customurlnf, "%.jpg")
+          or string.match(customurlnf, "%.jpeg")
+          or string.match(customurlnf, "%.png")
+          or string.match(customurlnf, "%.gif")
+          or string.match(customurlnf, "%.css")
+          or string.match(customurlnf, "%.js") then
+          local base = "http://www.panoramio.com"
+          local customurl = base..customurlnf
+          if downloaded[customurl] ~= true then
+            table.insert(urls, { url=customurl })
+          end
+        end
+      end
+      for customurlnf in string.gmatch(html, "'(/[^']+)'") do
+        if string.match(customurlnf, "//") then
+          local newurl = string.gsub(customurlnf, "//", "http://")
+          if downloaded[newurl] ~= true then
+            table.insert(urls, { url=newurl })
+          end
+        elseif string.match(customurlnf, "/"..item_type.."[0-9][0-9]/")
+          or string.match(customurlnf, "/css/")
+          or string.match(customurlnf, "/ajax/")
+          or string.match(customurlnf, "/js/")
+          or string.match(customurlnf, "/js_lib/")
+          or string.match(customurlnf, "/img/")
+          or string.match(customurlnf, "/wapi/")
+          or string.match(customurlnf, "/map/")
+          or string.match(customurlnf, "/offensive/")
+          or string.match(customurlnf, "/map_photo/")
+          or string.match(customurlnf, "/photo_counter_snippet")
+          or string.match(customurlnf, "with_photo_id")
+          or string.match(customurlnf, "/photo_explorer")
+          or string.match(customurlnf, "%.jpg")
+          or string.match(customurlnf, "%.jpeg")
+          or string.match(customurlnf, "%.png")
+          or string.match(customurlnf, "%.gif")
+          or string.match(customurlnf, "%.css")
+          or string.match(customurlnf, "%.js") then
+          local base = "http://www.panoramio.com"
+          local customurl = base..customurlnf
+          if downloaded[customurl] ~= true then
+            table.insert(urls, { url=customurl })
+          end
+        end
+      end
+    end
+  end
   
   return urls
 end
@@ -68,7 +246,9 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     downloaded[url.url] = true
   end
   
-  if status_code >= 500 or
+  if string.match(url["url"], "with_photo_id") then
+    wget.actions.EXIT
+  elseif status_code >= 500 or
     (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then
     io.stdout:write("\nServer returned "..http_stat.statcode..". Sleeping.\n")
     io.stdout:flush()

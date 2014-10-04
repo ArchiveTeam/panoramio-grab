@@ -318,10 +318,17 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "%.gif")
           or string.match(customurlnf, "%.css")
           or string.match(customurlnf, "%.js") then
-          local base = "http://www.panoramio.com"
-          local customurl = base..customurlnf
-          if downloaded[customurl] ~= true then
-            table.insert(urls, { url=customurl })
+          if string.match(customurlnf, "//[^%.]+%.googleusercontent") then
+            local customurl = string.gsub(custonurlnf, "//", "http://"
+            if downloaded[customurl] ~= true then
+              table.insert(urls, { url=customurl })
+            end
+          else
+            local base = "http://www.panoramio.com"
+            local customurl = base..customurlnf
+            if downloaded[customurl] ~= true then
+              table.insert(urls, { url=customurl })
+            end
           end
         end
       end
@@ -349,10 +356,17 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "%.gif")
           or string.match(customurlnf, "%.css")
           or string.match(customurlnf, "%.js") then
-          local base = "http://www.panoramio.com"
-          local customurl = base..customurlnf
-          if downloaded[customurl] ~= true then
-            table.insert(urls, { url=customurl })
+          if string.match(customurlnf, "//[^%.]+%.googleusercontent") then
+            local customurl = string.gsub(custonurlnf, "//", "http://"
+            if downloaded[customurl] ~= true then
+              table.insert(urls, { url=customurl })
+            end
+          else
+            local base = "http://www.panoramio.com"
+            local customurl = base..customurlnf
+            if downloaded[customurl] ~= true then
+              table.insert(urls, { url=customurl })
+            end
           end
         end
       end

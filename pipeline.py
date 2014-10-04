@@ -194,7 +194,7 @@ class WgetArgs(object):
         item['item_type'] = item_type
         item['item_value'] = item_value
         
-        assert item_type in ("page")
+        assert item_type in ("image99pack")
         
         if item_type == 'image99pack':
             suffixesa = string.digits

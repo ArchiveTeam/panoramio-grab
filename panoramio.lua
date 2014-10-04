@@ -79,12 +79,48 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     if (string.match(url, "/photos/") and string.match(url, "/"..item_type.."[0-9][0-9]/")) then
       if string.match(url, "static%.panoramio%.com") then
         local photo = string.match(url, "static%.panoramio%.com/photos/[^/]+/(.+)")
-      if string.match(url, "www%.panoramio%.com") then
+      elseif string.match(url, "static%.panoramio%.com%.storage%.googleapis%.com") then
+        local photo = string.match(url, "static%.panoramio%.com%.storage%.googleapis%.com/photos/[^/]+/(.+)")
+      elseif string.match(url, "www%.panoramio%.com") then
         local photo = string.match(url, "www%.panoramio%.com/photos/[^/]+/(.+)")
+      elseif string.match(url, "ssl%.panoramio%.com") then
+        local photo = string.match(url, "ssl%.panoramio%.com/photos/[^/]+/(.+)")
       elseif string.match(url, "mw2%.google%.com") then
         local photo = string.match(url, "static%.panoramio%.com/[^/]+/photos/[^/]+/(.+)")
       end
       if photo then
+        local storage_mini_square = "http://static.panoramio.com.storage.googleapis.com/photos/mini_square/"..photo
+        if downloaded[storage_mini_square] ~= true then
+          table.insert(urls, { url=storage_mini_square })
+        end
+        local storage_square = "http://static.panoramio.com.storage.googleapis.com/photos/square/"..photo
+        if downloaded[storage_square] ~= true then
+          table.insert(urls, { url=storage_square })
+        end
+        local storage_small = "http://static.panoramio.com.storage.googleapis.com/photos/small/"..photo
+        if downloaded[storage_small] ~= true then
+          table.insert(urls, { url=storage_small })
+        end
+        local storage_medium = "http://static.panoramio.com.storage.googleapis.com/photos/medium/"..photo
+        if downloaded[storage_medium] ~= true then
+          table.insert(urls, { url=storage_medium })
+        end
+        local storage_large = "http://static.panoramio.com.storage.googleapis.com/photos/large/"..photo
+        if downloaded[storage_large] ~= true then
+          table.insert(urls, { url=storage_large })
+        end
+        local storage_original = "http://static.panoramio.com.storage.googleapis.com/photos/original/"..photo
+        if downloaded[storage_original] ~= true then
+          table.insert(urls, { url=storage_original })
+        end
+        local storage_1920x1280 = "http://static.panoramio.com.storage.googleapis.com/photos/1920x1280/"..photo
+        if downloaded[storage_1920x1280] ~= true then
+          table.insert(urls, { url=storage_1920x1280 })
+        end
+        
+        
+        
+        
         local static_mini_square = "http://static.panoramio.com/photos/mini_square/"..photo
         if downloaded[static_mini_square] ~= true then
           table.insert(urls, { url=static_mini_square })
@@ -109,6 +145,44 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         if downloaded[static_original] ~= true then
           table.insert(urls, { url=static_original })
         end
+        local static_1920x1280 = "http://static.panoramio.com/photos/1920x1280/"..photo
+        if downloaded[static_1920x1280] ~= true then
+          table.insert(urls, { url=static_1920x1280 })
+        end
+        
+        
+        
+        local ssl_mini_square = "http://ssl.panoramio.com/photos/mini_square/"..photo
+        if downloaded[ssl_mini_square] ~= true then
+          table.insert(urls, { url=ssl_mini_square })
+        end
+        local ssl_square = "http://ssl.panoramio.com/photos/square/"..photo
+        if downloaded[ssl_square] ~= true then
+          table.insert(urls, { url=ssl_square })
+        end
+        local ssl_small = "http://ssl.panoramio.com/photos/small/"..photo
+        if downloaded[ssl_small] ~= true then
+          table.insert(urls, { url=ssl_small })
+        end
+        local ssl_medium = "http://ssl.panoramio.com/photos/medium/"..photo
+        if downloaded[ssl_medium] ~= true then
+          table.insert(urls, { url=ssl_medium })
+        end
+        local ssl_large = "http://ssl.panoramio.com/photos/large/"..photo
+        if downloaded[ssl_large] ~= true then
+          table.insert(urls, { url=ssl_large })
+        end
+        local ssl_original = "http://ssl.panoramio.com/photos/original/"..photo
+        if downloaded[ssl_original] ~= true then
+          table.insert(urls, { url=ssl_original })
+        end
+        local ssl_1920x1280 = "http://ssl.panoramio.com/photos/1920x1280/"..photo
+        if downloaded[ssl_1920x1280] ~= true then
+          table.insert(urls, { url=ssl_1920x1280 })
+        end
+        
+        
+        
         local www_mini_square = "http://www.panoramio.com/photos/mini_square/"..photo
         if downloaded[www_mini_square] ~= true then
           table.insert(urls, { url=www_mini_square })
@@ -133,6 +207,13 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         if downloaded[www_original] ~= true then
           table.insert(urls, { url=www_original })
         end
+        local www_1920x1280 = "http://www.panoramio.com/photos/1920x1280/"..photo
+        if downloaded[www_1920x1280] ~= true then
+          table.insert(urls, { url=www_1920x1280 })
+        end
+        
+        
+        
         local mw3_mini_square = "http://mw2.google.com/mw-panoramio/photos/mini_square/"..photo
         if downloaded[mw3_mini_square] ~= true then
           table.insert(urls, { url=mw3_mini_square })
@@ -278,7 +359,15 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     or string.match(url["url"], "www%.panoramio%.com/photos/small/") 
     or string.match(url["url"], "www%.panoramio%.com/photos/medium/") 
     or string.match(url["url"], "www%.panoramio%.com/photos/large/") 
-    or string.match(url["url"], "www%.panoramio%.com/photos/original/") then
+    or string.match(url["url"], "www%.panoramio%.com/photos/original/") 
+    or string.match(url["url"], "www%.panoramio%.com/photos/1920x1280/")
+    or string.match(url["url"], "ssl%.panoramio%.com/photos/mini_square/") 
+    or string.match(url["url"], "ssl%.panoramio%.com/photos/square/") 
+    or string.match(url["url"], "ssl%.panoramio%.com/photos/small/") 
+    or string.match(url["url"], "ssl%.panoramio%.com/photos/medium/") 
+    or string.match(url["url"], "ssl%.panoramio%.com/photos/large/") 
+    or string.match(url["url"], "ssl%.panoramio%.com/photos/original/") 
+    or string.match(url["url"], "ssl%.panoramio%.com/photos/1920x1280/") then
     wget.actions.EXIT
   elseif status_code >= 500 or
     (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then

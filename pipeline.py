@@ -204,8 +204,6 @@ class WgetArgs(object):
                           'https://ssl.panoramio.com/photo/{0}{1}{2}'.format(item_value, a, b)) for a in suffixesa for b in suffixesb]:
                 wget_args.append(args[0])
                 wget_args.append(args[1])
-                wget_args.append(args[2])
-                wget_args.append(args[3])
             
         else:
             raise Exception('Unknown item')

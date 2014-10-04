@@ -319,7 +319,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "%.css")
           or string.match(customurlnf, "%.js") then
           if string.match(customurlnf, "//[^%.]+%.googleusercontent") then
-            local customurl = string.gsub(custonurlnf, "//", "http://"
+            local customurl = string.gsub(custonurlnf, "//", "http://")
             if downloaded[customurl] ~= true then
               table.insert(urls, { url=customurl })
             end

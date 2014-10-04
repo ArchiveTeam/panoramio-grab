@@ -289,8 +289,10 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "static%.panoramio%.com%.storage%.googleapis%.com")
           or string.match(customurl, "googleusercontent%.com")
           or string.match(customurl, "googleapis%.com") then
-          if downloaded[customurl] ~= true then
-            table.insert(urls, { url=customurl })
+          if not string.match(customurl, "twitter%.com") then
+            if downloaded[customurl] ~= true then
+              table.insert(urls, { url=customurl })
+            end
           end
         end
       end

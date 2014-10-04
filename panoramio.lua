@@ -79,15 +79,15 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   if item_type == "image99pack" then
     if (string.match(url, "/photos/") and string.match(url, "/"..item_type)) then
       if string.match(url, "static%.panoramio%.com") then
-        local photo = string.match(url, "static%.panoramio%.com/photos/[^/]+/(.+)")
+        photo = string.match(url, "static%.panoramio%.com/photos/[^/]+/(.+)")
       elseif string.match(url, "static%.panoramio%.com%.storage%.googleapis%.com") then
-        local photo = string.match(url, "static%.panoramio%.com%.storage%.googleapis%.com/photos/[^/]+/(.+)")
+        photo = string.match(url, "static%.panoramio%.com%.storage%.googleapis%.com/photos/[^/]+/(.+)")
       elseif string.match(url, "www%.panoramio%.com") then
-        local photo = string.match(url, "www%.panoramio%.com/photos/[^/]+/(.+)")
+        photo = string.match(url, "www%.panoramio%.com/photos/[^/]+/(.+)")
       elseif string.match(url, "ssl%.panoramio%.com") then
-        local photo = string.match(url, "ssl%.panoramio%.com/photos/[^/]+/(.+)")
+        photo = string.match(url, "ssl%.panoramio%.com/photos/[^/]+/(.+)")
       elseif string.match(url, "mw2%.google%.com") then
-        local photo = string.match(url, "static%.panoramio%.com/[^/]+/photos/[^/]+/(.+)")
+        photo = string.match(url, "static%.panoramio%.com/[^/]+/photos/[^/]+/(.+)")
       end
       if string.match(photo, "[0-9]") then
         local storage_mini_square = "http://static.panoramio.com.storage.googleapis.com/photos/mini_square/"..photo

@@ -78,7 +78,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local photo = nil
   
   if item_type == "image99pack" then
-    if (string.match(url, "/photos/") and string.match(url, "/"..item_type.."[0-9][0-9]%.")) then
+    if (string.match(url, "/photos/") and string.match(url, "/"..item_value.."[0-9][0-9]%.")) then
       if string.match(url, "static%.panoramio%.com") then
         photo = string.match(url, "static%.panoramio%.com/photos/[^/]+/(.+)")
       elseif string.match(url, "static%.panoramio%.com%.storage%.googleapis%.com") then
@@ -239,12 +239,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         table.insert(urls, { url=baseurl })
       end
     end
-    if string.match(url, "/"..item_type.."[0-9][0-9]")
-      or string.match(url, "/"..item_type.."[0-9][0-9]&") 
-      or string.match(url, "/"..item_type.."[0-9][0-9]%?") then
+    if string.match(url, "/"..item_value.."[0-9][0-9]")
+      or string.match(url, "/"..item_value.."[0-9][0-9]&") 
+      or string.match(url, "/"..item_value.."[0-9][0-9]%?") then
       html = read_file(file)
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
-        if string.match(customurl, "/"..item_type.."[0-9][0-9]")
+        if string.match(customurl, "/"..item_value.."[0-9][0-9]")
           or string.match(customurl, "/css/")
           or string.match(customurl, "/ajax/")
           or string.match(customurl, "/js/")
@@ -281,7 +281,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           if downloaded[newurl] ~= true then
             table.insert(urls, { url=newurl })
           end
-        elseif string.match(customurlnf, "/"..item_type.."[0-9][0-9]")
+        elseif string.match(customurlnf, "/"..item_value.."[0-9][0-9]")
           or string.match(customurlnf, "/css/")
           or string.match(customurlnf, "/ajax/")
           or string.match(customurlnf, "/js/")
@@ -313,7 +313,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           if downloaded[newurl] ~= true then
             table.insert(urls, { url=newurl })
           end
-        elseif string.match(customurlnf, "/"..item_type.."[0-9][0-9]")
+        elseif string.match(customurlnf, "/"..item_value.."[0-9][0-9]")
           or string.match(customurlnf, "/css/")
           or string.match(customurlnf, "/ajax/")
           or string.match(customurlnf, "/js/")

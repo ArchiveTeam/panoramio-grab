@@ -203,7 +203,7 @@ class WgetArgs(object):
             for args in [('http://www.panoramio.com/photo/{0}{1}{2}'.format(item_value, a, b), \
                           'http://www.panoramio.com/photo/{0}{1}{2}/'.format(item_value, a, b), \
                           'https://ssl.panoramio.com/photo/{0}{1}{2}'.format(item_value, a, b), \
-                          'https://ssl.panoramio.com/photo/{0}{1}{2}/'.format(item_value, a, b)) for a in suffixesa, for b in suffixesb]:
+                          'https://ssl.panoramio.com/photo/{0}{1}{2}/'.format(item_value, a, b)) for a in suffixesa for b in suffixesb]:
                 wget_args.append(args[0])
                 wget_args.append(args[1])
             

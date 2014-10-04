@@ -99,6 +99,10 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         if downloaded[storage_square] ~= true then
           table.insert(urls, { url=storage_square })
         end
+        local storage_thumbnail = "http://static.panoramio.com.storage.googleapis.com/photos/thumbnail/"..photo
+        if downloaded[storage_thumbnail] ~= true then
+          table.insert(urls, { url=storage_thumbnail })
+        end
         local storage_small = "http://static.panoramio.com.storage.googleapis.com/photos/small/"..photo
         if downloaded[storage_small] ~= true then
           table.insert(urls, { url=storage_small })
@@ -131,6 +135,10 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         if downloaded[static_square] ~= true then
           table.insert(urls, { url=static_square })
         end
+        local static_thumbnail = "http://static.panoramio.com/photos/thumbnail/"..photo
+        if downloaded[static_thumbnail] ~= true then
+          table.insert(urls, { url=static_thumbnail })
+        end
         local static_small = "http://static.panoramio.com/photos/small/"..photo
         if downloaded[static_small] ~= true then
           table.insert(urls, { url=static_small })
@@ -161,6 +169,10 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         local ssl_square = "http://ssl.panoramio.com/photos/square/"..photo
         if downloaded[ssl_square] ~= true then
           table.insert(urls, { url=ssl_square })
+        end
+        local ssl_thumbnail = "http://ssl.panoramio.com/photos/thumbnail/"..photo
+        if downloaded[ssl_thumbnail] ~= true then
+          table.insert(urls, { url=ssl_thumbnail })
         end
         local ssl_small = "http://ssl.panoramio.com/photos/small/"..photo
         if downloaded[ssl_small] ~= true then
@@ -193,6 +205,10 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         if downloaded[www_square] ~= true then
           table.insert(urls, { url=www_square })
         end
+        local www_thumbnail = "http://www.panoramio.com/photos/thumbnail/"..photo
+        if downloaded[www_thumbnail] ~= true then
+          table.insert(urls, { url=www_thumbnail })
+        end
         local www_small = "http://www.panoramio.com/photos/small/"..photo
         if downloaded[www_small] ~= true then
           table.insert(urls, { url=www_small })
@@ -216,21 +232,25 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         
         
         
-        local mw3_mini_square = "http://mw2.google.com/mw-panoramio/photos/mini_square/"..photo
-        if downloaded[mw3_mini_square] ~= true then
-          table.insert(urls, { url=mw3_mini_square })
+        local mw2_mini_square = "http://mw2.google.com/mw-panoramio/photos/mini_square/"..photo
+        if downloaded[mw2_mini_square] ~= true then
+          table.insert(urls, { url=mw2_mini_square })
         end
-        local mw3_square = "http://mw2.google.com/mw-panoramio/photos/square/"..photo
-        if downloaded[mw3_square] ~= true then
-          table.insert(urls, { url=mw3_square })
+        local mw2_square = "http://mw2.google.com/mw-panoramio/photos/square/"..photo
+        if downloaded[mw2_square] ~= true then
+          table.insert(urls, { url=mw2_square })
         end
-        local mw3_small = "http://mw2.google.com/mw-panoramio/photos/small/"..photo
-        if downloaded[mw3_small] ~= true then
-          table.insert(urls, { url=mw3_small })
+        local mw2_thumbnail = "http://mw2.google.com/mw-panoramio/photos/thumbnail/"..photo
+        if downloaded[mw2_thumbnail] ~= true then
+          table.insert(urls, { url=mw2_thumbnail })
         end
-        local mw3_medium = "http://mw2.google.com/mw-panoramio/photos/medium/"..photo
-        if downloaded[mw3_medium] ~= true then
-          table.insert(urls, { url=mw3_medium })
+        local mw2_small = "http://mw2.google.com/mw-panoramio/photos/small/"..photo
+        if downloaded[mw2_small] ~= true then
+          table.insert(urls, { url=mw2_small })
+        end
+        local mw2_medium = "http://mw2.google.com/mw-panoramio/photos/medium/"..photo
+        if downloaded[mw2_medium] ~= true then
+          table.insert(urls, { url=mw2_medium })
         end
       end
     end
@@ -359,6 +379,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   if string.match(url["url"], "with_photo_id")
     or string.match(url["url"], "www%.panoramio%.com/photos/mini_square/") 
     or string.match(url["url"], "www%.panoramio%.com/photos/square/") 
+    or string.match(url["url"], "www%.panoramio%.com/photos/thumbnail/") 
     or string.match(url["url"], "www%.panoramio%.com/photos/small/") 
     or string.match(url["url"], "www%.panoramio%.com/photos/medium/") 
     or string.match(url["url"], "www%.panoramio%.com/photos/large/") 
@@ -366,6 +387,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     or string.match(url["url"], "www%.panoramio%.com/photos/1920x1280/")
     or string.match(url["url"], "ssl%.panoramio%.com/photos/mini_square/") 
     or string.match(url["url"], "ssl%.panoramio%.com/photos/square/") 
+    or string.match(url["url"], "ssl%.panoramio%.com/photos/thumbnail/") 
     or string.match(url["url"], "ssl%.panoramio%.com/photos/small/") 
     or string.match(url["url"], "ssl%.panoramio%.com/photos/medium/") 
     or string.match(url["url"], "ssl%.panoramio%.com/photos/large/") 

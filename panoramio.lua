@@ -75,6 +75,7 @@ end
 wget.callbacks.get_urls = function(file, url, is_css, iri)
   local urls = {}
   local html = nil
+  local photo = nil
   
   if item_type == "image99pack" then
     if (string.match(url, "/photos/") and string.match(url, "/"..item_type.."[0-9][0-9]%.")) then
@@ -241,6 +242,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     if string.match(url, "/"..item_type.."[0-9][0-9]")
       or string.match(url, "/"..item_type.."[0-9][0-9]&") 
       or string.match(url, "/"..item_type.."[0-9][0-9]%?") then
+      html = read_file(file)
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
         if string.match(customurl, "/"..item_type.."[0-9][0-9]")
           or string.match(customurl, "/css/")
@@ -353,7 +355,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   io.stdout:write(url_count .. "=" .. status_code .. " " .. url["url"] .. ".  \n")
   io.stdout:flush()
   
-  if (status_code >= 200 and status_code <= 399) or status_code == 403 then
+  if (status_code >= 200 and status_code <= 399) then
     downloaded[url.url] = true
   end
   

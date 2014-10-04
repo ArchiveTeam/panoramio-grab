@@ -42,27 +42,27 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
   end
   
   if item_type == "image99pack" then
-    if string.match(customurl, "/"..item_type.."[0-9][0-9]/")
-      or string.match(customurl, "/css/")
-      or string.match(customurl, "/ajax/")
-      or string.match(customurl, "/js/")
-      or string.match(customurl, "/js_lib/")
-      or string.match(customurl, "/img/")
-      or string.match(customurl, "/wapi/")
-      or string.match(customurl, "/offensive/")
-      or string.match(customurl, "%.jpg")
-      or string.match(customurl, "%.jpeg")
-      or string.match(customurl, "%.png")
-      or string.match(customurl, "%.gif")
-      or string.match(customurl, "%.css")
-      or string.match(customurl, "%.js")
-      or string.match(customurl, "gstatic%.com")
-      or string.match(customurl, "mw2%.google%.com")
-      or string.match(customurl, "apis%.google%.com")
-      or string.match(customurl, "static%.panoramio%.com")
-      or string.match(customurl, "static%.panoramio%.com%.storage%.googleapis%.com")
-      or string.match(customurl, "googleusercontent%.com")
-      or string.match(customurl, "googleapis%.com") then
+    if string.match(url, "/"..item_type.."[0-9][0-9]/")
+      or string.match(url, "/css/")
+      or string.match(url, "/ajax/")
+      or string.match(url, "/js/")
+      or string.match(url, "/js_lib/")
+      or string.match(url, "/img/")
+      or string.match(url, "/wapi/")
+      or string.match(url, "/offensive/")
+      or string.match(url, "%.jpg")
+      or string.match(url, "%.jpeg")
+      or string.match(url, "%.png")
+      or string.match(url, "%.gif")
+      or string.match(url, "%.css")
+      or string.match(url, "%.js")
+      or string.match(url, "gstatic%.com")
+      or string.match(url, "mw2%.google%.com")
+      or string.match(url, "apis%.google%.com")
+      or string.match(url, "static%.panoramio%.com")
+      or string.match(url, "static%.panoramio%.com%.storage%.googleapis%.com")
+      or string.match(url, "googleusercontent%.com")
+      or string.match(url, "googleapis%.com") then
       return true
     else
       return false

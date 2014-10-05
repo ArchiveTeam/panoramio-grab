@@ -312,13 +312,14 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurl, "googleusercontent%.com")
           or string.match(customurl, "googleapis%.com") then
           if not string.match(customurl, "twitter%.com") then
-            if downloaded[customurl] ~= true then
-              table.insert(urls, { url=customurl })
-            end
-            if string.match(customurl, "&amp;") then
+            if string.match(customurl, "chart%.googleapis%.com") and string.match(customurl, "&amp;") then
               local newcustomurl = string.gsub(customurl, "&amp;", "&")
               if downloaded[newcustomurl] ~= true then
                 table.insert(urls, { url=newcustomurl })
+              end
+            else
+              if downloaded[customurl] ~= true then
+                table.insert(urls, { url=customurl })
               end
             end
           end
@@ -350,25 +351,27 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "%.js") then
           if string.match(customurlnf, "//[^%.]+%.googleusercontent") then
             local customurl = string.gsub(customurlnf, "//", "http://")
-            if downloaded[customurl] ~= true then
-              table.insert(urls, { url=customurl })
-            end
-            if string.match(customurl, "&amp;") then
+            if string.match(customurl, "chart%.googleapis%.com") and string.match(customurl, "&amp;") then
               local newcustomurl = string.gsub(customurl, "&amp;", "&")
               if downloaded[newcustomurl] ~= true then
                 table.insert(urls, { url=newcustomurl })
+              end
+            else
+              if downloaded[customurl] ~= true then
+                table.insert(urls, { url=customurl })
               end
             end
           else
             local base = string.match(url, "(http[s]?://[^/]+)/")
             local customurl = base..customurlnf
-            if downloaded[customurl] ~= true then
-              table.insert(urls, { url=customurl })
-            end
-            if string.match(customurl, "&amp;") then
+            if string.match(customurl, "chart%.googleapis%.com") and string.match(customurl, "&amp;") then
               local newcustomurl = string.gsub(customurl, "&amp;", "&")
               if downloaded[newcustomurl] ~= true then
                 table.insert(urls, { url=newcustomurl })
+              end
+            else
+              if downloaded[customurl] ~= true then
+                table.insert(urls, { url=customurl })
               end
             end
           end
@@ -400,25 +403,27 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
           or string.match(customurlnf, "%.js") then
           if string.match(customurlnf, "//[^%.]+%.googleusercontent") then
             local customurl = string.gsub(customurlnf, "//", "http://")
-            if downloaded[customurl] ~= true then
-              table.insert(urls, { url=customurl })
-            end
-            if string.match(customurl, "&amp;") then
+            if string.match(customurl, "chart%.googleapis%.com") and string.match(customurl, "&amp;") then
               local newcustomurl = string.gsub(customurl, "&amp;", "&")
               if downloaded[newcustomurl] ~= true then
                 table.insert(urls, { url=newcustomurl })
+              end
+            else
+              if downloaded[customurl] ~= true then
+                table.insert(urls, { url=customurl })
               end
             end
           else
             local base = string.match(url, "(http[s]?://[^/]+)/")
             local customurl = base..customurlnf
-            if downloaded[customurl] ~= true then
-              table.insert(urls, { url=customurl })
-            end
-            if string.match(customurl, "&amp;") then
+            if string.match(customurl, "chart%.googleapis%.com") and string.match(customurl, "&amp;") then
               local newcustomurl = string.gsub(customurl, "&amp;", "&")
               if downloaded[newcustomurl] ~= true then
                 table.insert(urls, { url=newcustomurl })
+              end
+            else
+              if downloaded[customurl] ~= true then
+                table.insert(urls, { url=customurl })
               end
             end
           end

@@ -428,8 +428,21 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     or string.match(url["url"], "ssl%.panoramio%.com/photos/original/") 
     or string.match(url["url"], "ssl%.panoramio%.com/photos/1920x1280/") then
     return wget.actions.EXIT
-  elseif status_code == 400 and string.match(url["url"], "googleapis") then
-    return wget.actions.EXIT
+  elseif status_code == 400 then
+    io.stdout:write("\nServer returned "..http_stat.statcode..". Sleeping.\n")
+    io.stdout:flush()
+
+    os.execute("sleep 1")
+
+    tries = tries + 1
+
+    if tries >= 10 then
+      io.stdout:write("\nI give up...\n")
+      io.stdout:flush()
+      return wget.actions.EXIT
+    else
+      return wget.actions.CONTINUE
+    end
   elseif status_code >= 500 or
     (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then
     io.stdout:write("\nServer returned "..http_stat.statcode..". Sleeping.\n")

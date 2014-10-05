@@ -428,7 +428,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     or string.match(url["url"], "ssl%.panoramio%.com/photos/original/") 
     or string.match(url["url"], "ssl%.panoramio%.com/photos/1920x1280/") then
     return wget.actions.EXIT
-  elseif status_code == 400 then
+  elseif status_code == 400 and (string.match(url["url"], "www%.panoramio%.com/offensive/photo") or string.match(url["url"], "chart%.googleapis%.com")) then
     return wget.actions.EXIT
   elseif status_code >= 500 or
     (status_code >= 400 and status_code ~= 404 and status_code ~= 403) then

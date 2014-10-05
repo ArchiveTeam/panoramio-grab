@@ -275,7 +275,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       end
     end
     if string.match(url, "/"..item_value.."[0-9][0-9]")
-      or string.match(url, "/"..item_value.."[0-9][0-9]&") 
+      or string.match(url, "="..item_value.."[0-9][0-9]&")
+      or string.match(url, "?"..item_value.."[0-9][0-9]&")
       or string.match(url, "/"..item_value.."[0-9][0-9]%?") then
       html = read_file(file)
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
@@ -341,7 +342,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
               table.insert(urls, { url=customurl })
             end
           else
-            local base = "http://www.panoramio.com"
+            local base = string.match(url, "(http[s]?://[^/]+)")
             local customurl = base..customurlnf
             if downloaded[customurl] ~= true then
               table.insert(urls, { url=customurl })
@@ -379,7 +380,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
               table.insert(urls, { url=customurl })
             end
           else
-            local base = "http://www.panoramio.com"
+            local base = string.match(url, "(http[s]?://[^/]+)")
             local customurl = base..customurlnf
             if downloaded[customurl] ~= true then
               table.insert(urls, { url=customurl })

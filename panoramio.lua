@@ -118,167 +118,167 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         photo = string.match(url, "static%.panoramio%.com/[^/]+/photos/[^/]+/(.+)")
       end
       if photo then
-        local storage_mini_square = "http://static.panoramio.com.storage.googleapis.com/photos/mini_square/"..photo
-        if downloaded[storage_mini_square] ~= true then
-          table.insert(urls, { url=storage_mini_square })
-        end
-        local storage_square = "http://static.panoramio.com.storage.googleapis.com/photos/square/"..photo
-        if downloaded[storage_square] ~= true then
-          table.insert(urls, { url=storage_square })
-        end
-        local storage_thumbnail = "http://static.panoramio.com.storage.googleapis.com/photos/thumbnail/"..photo
-        if downloaded[storage_thumbnail] ~= true then
-          table.insert(urls, { url=storage_thumbnail })
-        end
-        local storage_small = "http://static.panoramio.com.storage.googleapis.com/photos/small/"..photo
-        if downloaded[storage_small] ~= true then
-          table.insert(urls, { url=storage_small })
-        end
-        local storage_medium = "http://static.panoramio.com.storage.googleapis.com/photos/medium/"..photo
-        if downloaded[storage_medium] ~= true then
-          table.insert(urls, { url=storage_medium })
-        end
-        local storage_large = "http://static.panoramio.com.storage.googleapis.com/photos/large/"..photo
-        if downloaded[storage_large] ~= true then
-          table.insert(urls, { url=storage_large })
-        end
-        local storage_original = "http://static.panoramio.com.storage.googleapis.com/photos/original/"..photo
-        if downloaded[storage_original] ~= true then
-          table.insert(urls, { url=storage_original })
-        end
-        local storage_1920x1280 = "http://static.panoramio.com.storage.googleapis.com/photos/1920x1280/"..photo
-        if downloaded[storage_1920x1280] ~= true then
-          table.insert(urls, { url=storage_1920x1280 })
-        end
-        
-        
-        
-        
-        local static_mini_square = "http://static.panoramio.com/photos/mini_square/"..photo
-        if downloaded[static_mini_square] ~= true then
-          table.insert(urls, { url=static_mini_square })
-        end
-        local static_square = "http://static.panoramio.com/photos/square/"..photo
-        if downloaded[static_square] ~= true then
-          table.insert(urls, { url=static_square })
-        end
-        local static_thumbnail = "http://static.panoramio.com/photos/thumbnail/"..photo
-        if downloaded[static_thumbnail] ~= true then
-          table.insert(urls, { url=static_thumbnail })
-        end
-        local static_small = "http://static.panoramio.com/photos/small/"..photo
-        if downloaded[static_small] ~= true then
-          table.insert(urls, { url=static_small })
-        end
-        local static_medium = "http://static.panoramio.com/photos/medium/"..photo
-        if downloaded[static_medium] ~= true then
-          table.insert(urls, { url=static_medium })
-        end
-        local static_large = "http://static.panoramio.com/photos/large/"..photo
-        if downloaded[static_large] ~= true then
-          table.insert(urls, { url=static_large })
-        end
+--        local storage_mini_square = "http://static.panoramio.com.storage.googleapis.com/photos/mini_square/"..photo
+--        if downloaded[storage_mini_square] ~= true then
+--          table.insert(urls, { url=storage_mini_square })
+--        end
+--        local storage_square = "http://static.panoramio.com.storage.googleapis.com/photos/square/"..photo
+--        if downloaded[storage_square] ~= true then
+--          table.insert(urls, { url=storage_square })
+--        end
+--        local storage_thumbnail = "http://static.panoramio.com.storage.googleapis.com/photos/thumbnail/"..photo
+--        if downloaded[storage_thumbnail] ~= true then
+--          table.insert(urls, { url=storage_thumbnail })
+--        end
+--        local storage_small = "http://static.panoramio.com.storage.googleapis.com/photos/small/"..photo
+--        if downloaded[storage_small] ~= true then
+--          table.insert(urls, { url=storage_small })
+--        end
+--        local storage_medium = "http://static.panoramio.com.storage.googleapis.com/photos/medium/"..photo
+--        if downloaded[storage_medium] ~= true then
+--          table.insert(urls, { url=storage_medium })
+--        end
+--        local storage_large = "http://static.panoramio.com.storage.googleapis.com/photos/large/"..photo
+--        if downloaded[storage_large] ~= true then
+--          table.insert(urls, { url=storage_large })
+--        end
+--        local storage_original = "http://static.panoramio.com.storage.googleapis.com/photos/original/"..photo
+--        if downloaded[storage_original] ~= true then
+--          table.insert(urls, { url=storage_original })
+--        end
+--        local storage_1920x1280 = "http://static.panoramio.com.storage.googleapis.com/photos/1920x1280/"..photo
+--        if downloaded[storage_1920x1280] ~= true then
+--          table.insert(urls, { url=storage_1920x1280 })
+--        end
+--        
+--        
+--        
+--        
+--        local static_mini_square = "http://static.panoramio.com/photos/mini_square/"..photo
+--        if downloaded[static_mini_square] ~= true then
+--          table.insert(urls, { url=static_mini_square })
+--        end
+--        local static_square = "http://static.panoramio.com/photos/square/"..photo
+--        if downloaded[static_square] ~= true then
+--          table.insert(urls, { url=static_square })
+--        end
+--        local static_thumbnail = "http://static.panoramio.com/photos/thumbnail/"..photo
+--        if downloaded[static_thumbnail] ~= true then
+--          table.insert(urls, { url=static_thumbnail })
+--        end
+--        local static_small = "http://static.panoramio.com/photos/small/"..photo
+--        if downloaded[static_small] ~= true then
+--          table.insert(urls, { url=static_small })
+--        end
+--        local static_medium = "http://static.panoramio.com/photos/medium/"..photo
+--        if downloaded[static_medium] ~= true then
+--          table.insert(urls, { url=static_medium })
+--        end
+--        local static_large = "http://static.panoramio.com/photos/large/"..photo
+--        if downloaded[static_large] ~= true then
+--          table.insert(urls, { url=static_large })
+--        end
         local static_original = "http://static.panoramio.com/photos/original/"..photo
         if downloaded[static_original] ~= true then
           table.insert(urls, { url=static_original })
         end
-        local static_1920x1280 = "http://static.panoramio.com/photos/1920x1280/"..photo
-        if downloaded[static_1920x1280] ~= true then
-          table.insert(urls, { url=static_1920x1280 })
-        end
-        
-        
-        
-        local ssl_mini_square = "http://ssl.panoramio.com/photos/mini_square/"..photo
-        if downloaded[ssl_mini_square] ~= true then
-          table.insert(urls, { url=ssl_mini_square })
-        end
-        local ssl_square = "http://ssl.panoramio.com/photos/square/"..photo
-        if downloaded[ssl_square] ~= true then
-          table.insert(urls, { url=ssl_square })
-        end
-        local ssl_thumbnail = "http://ssl.panoramio.com/photos/thumbnail/"..photo
-        if downloaded[ssl_thumbnail] ~= true then
-          table.insert(urls, { url=ssl_thumbnail })
-        end
-        local ssl_small = "http://ssl.panoramio.com/photos/small/"..photo
-        if downloaded[ssl_small] ~= true then
-          table.insert(urls, { url=ssl_small })
-        end
-        local ssl_medium = "http://ssl.panoramio.com/photos/medium/"..photo
-        if downloaded[ssl_medium] ~= true then
-          table.insert(urls, { url=ssl_medium })
-        end
-        local ssl_large = "http://ssl.panoramio.com/photos/large/"..photo
-        if downloaded[ssl_large] ~= true then
-          table.insert(urls, { url=ssl_large })
-        end
-        local ssl_original = "http://ssl.panoramio.com/photos/original/"..photo
-        if downloaded[ssl_original] ~= true then
-          table.insert(urls, { url=ssl_original })
-        end
-        local ssl_1920x1280 = "http://ssl.panoramio.com/photos/1920x1280/"..photo
-        if downloaded[ssl_1920x1280] ~= true then
-          table.insert(urls, { url=ssl_1920x1280 })
-        end
-        
-        
-        
-        local www_mini_square = "http://www.panoramio.com/photos/mini_square/"..photo
-        if downloaded[www_mini_square] ~= true then
-          table.insert(urls, { url=www_mini_square })
-        end
-        local www_square = "http://www.panoramio.com/photos/square/"..photo
-        if downloaded[www_square] ~= true then
-          table.insert(urls, { url=www_square })
-        end
-        local www_thumbnail = "http://www.panoramio.com/photos/thumbnail/"..photo
-        if downloaded[www_thumbnail] ~= true then
-          table.insert(urls, { url=www_thumbnail })
-        end
-        local www_small = "http://www.panoramio.com/photos/small/"..photo
-        if downloaded[www_small] ~= true then
-          table.insert(urls, { url=www_small })
-        end
-        local www_medium = "http://www.panoramio.com/photos/medium/"..photo
-        if downloaded[www_medium] ~= true then
-          table.insert(urls, { url=www_medium })
-        end
-        local www_large = "http://www.panoramio.com/photos/large/"..photo
-        if downloaded[www_large] ~= true then
-          table.insert(urls, { url=www_large })
-        end
-        local www_original = "http://www.panoramio.com/photos/original/"..photo
-        if downloaded[www_original] ~= true then
-          table.insert(urls, { url=www_original })
-        end
-        local www_1920x1280 = "http://www.panoramio.com/photos/1920x1280/"..photo
-        if downloaded[www_1920x1280] ~= true then
-          table.insert(urls, { url=www_1920x1280 })
-        end
-        
-        
-        
-        local mw2_mini_square = "http://mw2.google.com/mw-panoramio/photos/mini_square/"..photo
-        if downloaded[mw2_mini_square] ~= true then
-          table.insert(urls, { url=mw2_mini_square })
-        end
-        local mw2_square = "http://mw2.google.com/mw-panoramio/photos/square/"..photo
-        if downloaded[mw2_square] ~= true then
-          table.insert(urls, { url=mw2_square })
-        end
-        local mw2_thumbnail = "http://mw2.google.com/mw-panoramio/photos/thumbnail/"..photo
-        if downloaded[mw2_thumbnail] ~= true then
-          table.insert(urls, { url=mw2_thumbnail })
-        end
-        local mw2_small = "http://mw2.google.com/mw-panoramio/photos/small/"..photo
-        if downloaded[mw2_small] ~= true then
-          table.insert(urls, { url=mw2_small })
-        end
-        local mw2_medium = "http://mw2.google.com/mw-panoramio/photos/medium/"..photo
-        if downloaded[mw2_medium] ~= true then
-          table.insert(urls, { url=mw2_medium })
-        end
+--        local static_1920x1280 = "http://static.panoramio.com/photos/1920x1280/"..photo
+--        if downloaded[static_1920x1280] ~= true then
+--          table.insert(urls, { url=static_1920x1280 })
+--        end
+--        
+--        
+--        
+--        local ssl_mini_square = "http://ssl.panoramio.com/photos/mini_square/"..photo
+--        if downloaded[ssl_mini_square] ~= true then
+--          table.insert(urls, { url=ssl_mini_square })
+--        end
+--        local ssl_square = "http://ssl.panoramio.com/photos/square/"..photo
+--        if downloaded[ssl_square] ~= true then
+--          table.insert(urls, { url=ssl_square })
+--        end
+--        local ssl_thumbnail = "http://ssl.panoramio.com/photos/thumbnail/"..photo
+--        if downloaded[ssl_thumbnail] ~= true then
+--          table.insert(urls, { url=ssl_thumbnail })
+--        end
+--        local ssl_small = "http://ssl.panoramio.com/photos/small/"..photo
+--        if downloaded[ssl_small] ~= true then
+--          table.insert(urls, { url=ssl_small })
+--        end
+--        local ssl_medium = "http://ssl.panoramio.com/photos/medium/"..photo
+--        if downloaded[ssl_medium] ~= true then
+--          table.insert(urls, { url=ssl_medium })
+--        end
+--        local ssl_large = "http://ssl.panoramio.com/photos/large/"..photo
+--        if downloaded[ssl_large] ~= true then
+--          table.insert(urls, { url=ssl_large })
+--        end
+--        local ssl_original = "http://ssl.panoramio.com/photos/original/"..photo
+--        if downloaded[ssl_original] ~= true then
+--          table.insert(urls, { url=ssl_original })
+--        end
+--        local ssl_1920x1280 = "http://ssl.panoramio.com/photos/1920x1280/"..photo
+--        if downloaded[ssl_1920x1280] ~= true then
+--          table.insert(urls, { url=ssl_1920x1280 })
+--        end
+--        
+--        
+--        
+--        local www_mini_square = "http://www.panoramio.com/photos/mini_square/"..photo
+--        if downloaded[www_mini_square] ~= true then
+--          table.insert(urls, { url=www_mini_square })
+--        end
+--        local www_square = "http://www.panoramio.com/photos/square/"..photo
+--        if downloaded[www_square] ~= true then
+--          table.insert(urls, { url=www_square })
+--        end
+--        local www_thumbnail = "http://www.panoramio.com/photos/thumbnail/"..photo
+--        if downloaded[www_thumbnail] ~= true then
+--          table.insert(urls, { url=www_thumbnail })
+--        end
+--        local www_small = "http://www.panoramio.com/photos/small/"..photo
+--        if downloaded[www_small] ~= true then
+--          table.insert(urls, { url=www_small })
+--        end
+--        local www_medium = "http://www.panoramio.com/photos/medium/"..photo
+--        if downloaded[www_medium] ~= true then
+--          table.insert(urls, { url=www_medium })
+--        end
+--        local www_large = "http://www.panoramio.com/photos/large/"..photo
+--        if downloaded[www_large] ~= true then
+--          table.insert(urls, { url=www_large })
+--        end
+--        local www_original = "http://www.panoramio.com/photos/original/"..photo
+--        if downloaded[www_original] ~= true then
+--          table.insert(urls, { url=www_original })
+--        end
+--        local www_1920x1280 = "http://www.panoramio.com/photos/1920x1280/"..photo
+--        if downloaded[www_1920x1280] ~= true then
+--          table.insert(urls, { url=www_1920x1280 })
+--        end
+--        
+--        
+--        
+--        local mw2_mini_square = "http://mw2.google.com/mw-panoramio/photos/mini_square/"..photo
+--        if downloaded[mw2_mini_square] ~= true then
+--          table.insert(urls, { url=mw2_mini_square })
+--        end
+--        local mw2_square = "http://mw2.google.com/mw-panoramio/photos/square/"..photo
+--        if downloaded[mw2_square] ~= true then
+--          table.insert(urls, { url=mw2_square })
+--        end
+--        local mw2_thumbnail = "http://mw2.google.com/mw-panoramio/photos/thumbnail/"..photo
+--        if downloaded[mw2_thumbnail] ~= true then
+--          table.insert(urls, { url=mw2_thumbnail })
+--        end
+--        local mw2_small = "http://mw2.google.com/mw-panoramio/photos/small/"..photo
+--        if downloaded[mw2_small] ~= true then
+--          table.insert(urls, { url=mw2_small })
+--        end
+--        local mw2_medium = "http://mw2.google.com/mw-panoramio/photos/medium/"..photo
+--        if downloaded[mw2_medium] ~= true then
+--          table.insert(urls, { url=mw2_medium })
+--        end
       end
     end
     if string.match(url, "/"..item_value.."[0-9][0-9]")
@@ -321,6 +321,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
               if downloaded[customurl] ~= true then
                 table.insert(urls, { url=customurl })
               end
+              if string.match(customurl, "&amp;") then
+                local newcustomurl = string.gsub(customurl, "&amp;", "&")
+                if downloaded[newcustomurl] ~= true then
+                  table.insert(urls, { url=newcustomurl })
+                end
+              end
             end
           end
         end
@@ -360,6 +366,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
               if downloaded[customurl] ~= true then
                 table.insert(urls, { url=customurl })
               end
+              if string.match(customurl, "&amp;") then
+                local newcustomurl = string.gsub(customurl, "&amp;", "&")
+                if downloaded[newcustomurl] ~= true then
+                  table.insert(urls, { url=newcustomurl })
+                end
+              end
             end
           else
             local base = string.match(url, "(http[s]?://[^/]+)/")
@@ -372,6 +384,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
             else
               if downloaded[customurl] ~= true then
                 table.insert(urls, { url=customurl })
+              end
+              if string.match(customurl, "&amp;") then
+                local newcustomurl = string.gsub(customurl, "&amp;", "&")
+                if downloaded[newcustomurl] ~= true then
+                  table.insert(urls, { url=newcustomurl })
+                end
               end
             end
           end

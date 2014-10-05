@@ -78,6 +78,18 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
   local photo = nil
   
   if item_type == "image99pack" then
+    
+    for baseurl in string.gmatch(url, "(http[s]?://static%.panoramio%.com/avatars/user/[0-9]+%.jpg)%?v=") do
+      if downloaded[baseurl] ~= true then
+        table.insert(urls, { url=baseurl })
+      end
+    end
+    if string.match(url, "/map/%?place=") then
+      local newurl = string.gsub(url, "/map/", "/kml/")
+      if downloaded[newurl] ~= true then
+        table.insert(urls, { url=newurl })
+      end
+    end
     if (string.match(url, "/photos/") and string.match(url, "/"..item_value.."[0-9][0-9]%.")) then
       if string.match(url, "static%.panoramio%.com") then
         photo = string.match(url, "static%.panoramio%.com/photos/[^/]+/(.+)")
@@ -252,17 +264,6 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         if downloaded[mw2_medium] ~= true then
           table.insert(urls, { url=mw2_medium })
         end
-      end
-    end
-    for baseurl in string.gmatch(url, "(http[s]?://static%.panoramio%.com/avatars/user/[0-9]+%.jpg)%?v=") do
-      if downloaded[baseurl] ~= true then
-        table.insert(urls, { url=baseurl })
-      end
-    end
-    if string.match(url, "/map/%?place=") then
-      local newurl = string.gsub(url, "/map/", "/kml/")
-      if downloaded[newurl] ~= true then
-        table.insert(urls, { url=newurl })
       end
     end
     if string.match(url, "/"..item_value.."[0-9][0-9]")

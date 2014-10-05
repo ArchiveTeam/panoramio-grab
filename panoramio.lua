@@ -93,8 +93,15 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     if string.match(url, "%.kml") or string.match(url, "/kml/") then
       html = read_file(file)
       for hrefurl in string.gmatch(html, "<href>([^>]+)<") do
-        if downloaded[hrefurl] ~= true then
-          table.insert(urls, { url=hrefurl })
+        if string.match(hrefurl, "&amp;") then
+          local hrefurlnew = string.gsub(hrefurl, "&amp;", "&")
+          if downloaded[hrefurlnew] ~= true then
+            table.insert(urls, { url=hrefurlnew })
+          end
+        else
+          if downloaded[hrefurl] ~= true then
+            table.insert(urls, { url=hrefurl })
+          end
         end
       end
     end

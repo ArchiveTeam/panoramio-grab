@@ -259,6 +259,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         table.insert(urls, { url=baseurl })
       end
     end
+    if string.match(url, "/map/%?place=") then
+      local newurl = string.gsub(url, "/map/", "/kml/")
+      if downloaded[newurl] ~= true then
+        table.insert(urls, { url=newurl })
+      end
+    end
     if string.match(url, "/"..item_value.."[0-9][0-9]")
       or string.match(url, "/"..item_value.."[0-9][0-9]&") 
       or string.match(url, "/"..item_value.."[0-9][0-9]%?") then

@@ -275,9 +275,8 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
       end
     end
     if string.match(url, "/"..item_value.."[0-9][0-9]")
-      or string.match(url, "="..item_value.."[0-9][0-9]&")
-      or string.match(url, "?"..item_value.."[0-9][0-9]&")
-      or string.match(url, "/"..item_value.."[0-9][0-9]%?") then
+      or string.match(url, "="..item_value.."[0-9][0-9]")
+      or string.match(url, "%?"..item_value.."[0-9][0-9]") then
       html = read_file(file)
       for customurl in string.gmatch(html, '"(http[s]?://[^"]+)"') do
         if string.match(customurl, "/"..item_value.."[0-9][0-9]")

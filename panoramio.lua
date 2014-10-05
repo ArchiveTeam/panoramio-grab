@@ -308,6 +308,12 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
             if downloaded[customurl] ~= true then
               table.insert(urls, { url=customurl })
             end
+            if string.match(customurl, "&amp;") then
+              local newcustomurl = string.gsub(customurl, "&amp;", "&")
+              if downloaded[newcustomurl] ~= true then
+                table.insert(urls, { url=newcustomurl })
+              end
+            end
           end
         end
       end
@@ -340,11 +346,23 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
             if downloaded[customurl] ~= true then
               table.insert(urls, { url=customurl })
             end
+            if string.match(customurl, "&amp;") then
+              local newcustomurl = string.gsub(customurl, "&amp;", "&")
+              if downloaded[newcustomurl] ~= true then
+                table.insert(urls, { url=newcustomurl })
+              end
+            end
           else
             local base = string.match(url, "(http[s]?://[^/]+)")
             local customurl = base..customurlnf
             if downloaded[customurl] ~= true then
               table.insert(urls, { url=customurl })
+            end
+            if string.match(customurl, "&amp;") then
+              local newcustomurl = string.gsub(customurl, "&amp;", "&")
+              if downloaded[newcustomurl] ~= true then
+                table.insert(urls, { url=newcustomurl })
+              end
             end
           end
         end
@@ -378,11 +396,23 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
             if downloaded[customurl] ~= true then
               table.insert(urls, { url=customurl })
             end
+            if string.match(customurl, "&amp;") then
+              local newcustomurl = string.gsub(customurl, "&amp;", "&")
+              if downloaded[newcustomurl] ~= true then
+                table.insert(urls, { url=newcustomurl })
+              end
+            end
           else
             local base = string.match(url, "(http[s]?://[^/]+)")
             local customurl = base..customurlnf
             if downloaded[customurl] ~= true then
               table.insert(urls, { url=customurl })
+            end
+            if string.match(customurl, "&amp;") then
+              local newcustomurl = string.gsub(customurl, "&amp;", "&")
+              if downloaded[newcustomurl] ~= true then
+                table.insert(urls, { url=newcustomurl })
+              end
             end
           end
         end

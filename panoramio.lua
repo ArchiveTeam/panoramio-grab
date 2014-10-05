@@ -90,6 +90,14 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
         table.insert(urls, { url=newurl })
       end
     end
+    if string.match(url, "%.kml") or string.match(url, "/kml/") then
+      html = read_file(file)
+      for hrefurl in string.gmatch(html, "<href>([^>]+)<") do
+        if downloaded[hrefurl] ~= true then
+          table.insert(urls, { url=hrefurl })
+        end
+      end
+    end
     if (string.match(url, "/photos/") and string.match(url, "/"..item_value.."[0-9][0-9]%.")) then
       if string.match(url, "static%.panoramio%.com") then
         photo = string.match(url, "static%.panoramio%.com/photos/[^/]+/(.+)")

@@ -353,7 +353,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
               end
             end
           else
-            local base = string.match(url, "(http[s]?://[^/]+)")
+            local base = string.match(url, "(http[s]?://[^/]+)/")
             local customurl = base..customurlnf
             if downloaded[customurl] ~= true then
               table.insert(urls, { url=customurl })
@@ -403,7 +403,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
               end
             end
           else
-            local base = string.match(url, "(http[s]?://[^/]+)")
+            local base = string.match(url, "(http[s]?://[^/]+)/")
             local customurl = base..customurlnf
             if downloaded[customurl] ~= true then
               table.insert(urls, { url=customurl })

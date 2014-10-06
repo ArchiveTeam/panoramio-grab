@@ -178,10 +178,10 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
 --        if downloaded[static_large] ~= true then
 --          table.insert(urls, { url=static_large })
 --        end
---        local static_original = "http://static.panoramio.com/photos/original/"..photo
---        if downloaded[static_original] ~= true then
---          table.insert(urls, { url=static_original })
---        end
+        local static_original = "http://static.panoramio.com/photos/original/"..photo
+        if downloaded[static_original] ~= true then
+          table.insert(urls, { url=static_original })
+        end
 --        local static_1920x1280 = "http://static.panoramio.com/photos/1920x1280/"..photo
 --        if downloaded[static_1920x1280] ~= true then
 --          table.insert(urls, { url=static_1920x1280 })

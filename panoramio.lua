@@ -488,6 +488,7 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
     or string.match(url["url"], "/signin/") 
     or string.match(url["url"], "/signup/") 
     or string.match(url["url"], "http[s]?://%%") 
+    or string.match(url["url"], "http[s]?://[^/]+/%%[^%%]+%%[^%%]+%%[^%%]+%%[^%%]+%%[^%%]+%%")  
     or string.match(url["url"], "ssl%.panoramio%.com/photos/original/") 
     or string.match(url["url"], "ssl%.panoramio%.com/photos/1920x1280/") then
     return wget.actions.EXIT

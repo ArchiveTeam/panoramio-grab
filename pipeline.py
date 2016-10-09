@@ -5,6 +5,7 @@ import hashlib
 import os.path
 import random
 from seesaw.config import realize, NumberConfigValue
+from seesaw.externalprocess import ExternalProcess
 from seesaw.item import ItemInterpolation, ItemValue
 from seesaw.task import SimpleTask, LimitConcurrent
 from seesaw.tracker import GetItemFromTracker, PrepareStatsForTracker, \
@@ -24,8 +25,8 @@ from seesaw.util import find_executable
 
 
 # check the seesaw version
-if StrictVersion(seesaw.__version__) < StrictVersion("0.1.5"):
-    raise Exception("This pipeline needs seesaw version 0.1.5 or higher.")
+if StrictVersion(seesaw.__version__) < StrictVersion("0.8.5"):
+    raise Exception("This pipeline needs seesaw version 0.8.5 or higher.")
 
 
 ###########################################################################
@@ -36,7 +37,7 @@ if StrictVersion(seesaw.__version__) < StrictVersion("0.1.5"):
 # 2. prints the required version string
 WGET_LUA = find_executable(
     "Wget+Lua",
-    ["GNU Wget 1.14.lua.20130523-9a5c"],
+    ["GNU Wget 1.14.lua.20130523-9a5c", "GNU Wget 1.14.lua.20160530-955376b"],
     [
         "./wget-lua",
         "./wget-lua-warrior",
@@ -57,7 +58,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20141006.01"
+VERSION = "20161009.01"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'panoramio'
 TRACKER_HOST = 'tracker.archiveteam.org'
@@ -166,6 +167,7 @@ class WgetArgs(object):
             WGET_LUA,
             "-U", USER_AGENT,
             "-nv",
+            "--no-cookies",
             "--lua-script", "panoramio.lua",
             "-o", ItemInterpolation("%(item_dir)s/wget.log"),
             "--no-check-certificate",
@@ -184,7 +186,7 @@ class WgetArgs(object):
             "--warc-file", ItemInterpolation("%(item_dir)s/%(warc_file_base)s"),
             "--warc-header", "operator: Archive Team",
             "--warc-header", "panoramio-dld-script-version: " + VERSION,
-            "--warc-header", ItemInterpolation("panoramio-user: %(item_name)s"),
+            "--warc-header", ItemInterpolation("panoramio-item: %(item_name)s"),
         ]
         
         item_name = item['item_name']
@@ -194,17 +196,13 @@ class WgetArgs(object):
         item['item_type'] = item_type
         item['item_value'] = item_value
         
-        assert item_type in ("image99pack")
-        
-        if item_type == 'image99pack':
-            suffixesa = string.digits
-            suffixesb = string.digits
-            
-            for args in [('http://www.panoramio.com/photo/{0}{1}{2}'.format(item_value, a, b), \
-                          'https://ssl.panoramio.com/photo/{0}{1}{2}'.format(item_value, a, b)) for a in suffixesa for b in suffixesb]:
-                wget_args.append(args[0])
-                wget_args.append(args[1])
-            
+        assert item_type in ('photos')
+
+        if item_type == 'photos':
+            start, stop = item_value.split('-')
+            for i in range(int(start), int(stop)+1):
+                wget_args.extend(['--warc-header', 'panoramio-photo: {i}'.format(**locals())])
+                wget_args.append('http://www.panoramio.com/photo/{i}'.format(**locals()))
         else:
             raise Exception('Unknown item')
         
@@ -225,9 +223,9 @@ class WgetArgs(object):
 project = Project(
     title="panoramio",
     project_html="""
-        <img class="project-logo" alt="Project logo" src="http://archiveteam.org/images/1/17/Panoramio_logo.jpg" height="50px" title=""/>
+        <img class="project-logo" alt="Project logo" src="http://archiveteam.org/images/thumb/1/17/Panoramio_logo.jpg/799px-Panoramio_logo.jpg" height="50px" title=""/>
         <h2>www.panoramio.com <span class="links"><a href="http://www.panoramio.com/">Website</a> &middot; <a href="http://tracker.archiveteam.org/panoramio/">Leaderboard</a></span></h2>
-        <p>Archiving Panoramio.</p>
+        <p>Archiving all photos from panoramio.</p>
     """
 )
 
@@ -244,6 +242,7 @@ pipeline = Pipeline(
             "item_dir": ItemValue("item_dir"),
             "item_value": ItemValue("item_value"),
             "item_type": ItemValue("item_type"),
+            "warc_file_base": ItemValue("warc_file_base"),
         }
     ),
     PrepareStatsForTracker(

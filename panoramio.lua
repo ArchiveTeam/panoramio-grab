@@ -135,7 +135,7 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     check("http://www.panoramio.com/photos/large/" .. photo)
     check("http://www.panoramio.com/photos/1920x1280/" .. photo)
     check("http://www.panoramio.com/photos/original/" .. photo)
-    check("http://www.panoramio.com/photos/d/" .. photo)
+    --check("http://www.panoramio.com/photos/d/" .. photo)
   end
   
   if allowed(url) then

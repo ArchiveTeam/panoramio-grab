@@ -138,7 +138,9 @@ wget.callbacks.get_urls = function(file, url, is_css, iri)
     --check("http://www.panoramio.com/photos/d/" .. photo)
   end
   
-  if allowed(url) then
+  if allowed(url)
+     and not (string.match(url, "^https?://mw2%.google%.com")
+      or string.match(url, "^https?://static%.panoramio%.com")) then
     html = read_file(file)
     if string.match(url, "/kml/")
        or string.match(url, "%.kml") then
@@ -188,6 +190,16 @@ wget.callbacks.httploop_result = function(url, err, http_stat)
   if status_code == 302
      and string.match(url["url"], "^https?://[^/]*panoramio%.com/map_photo/%?id=[0-9]+$") then
     return wget.actions.EXIT
+  end
+
+  if status_code == 301 and string.match(url["url"], "^http://www%.panoramio%.com/photos/[^/]+/") then
+    local image = string.match(url["url"], "^http://www%.panoramio%.com(/photos/[^/]+/.+)$")
+    if downloaded["http://static.panoramio.com" .. image] == true
+       or downloaded["http://mw2.google.com/mw-panoramio" .. image] == true
+       or addedtolist["http://mw2.google.com/mw-panoramio" .. image] == true
+       or addedtolist["http://static.panoramio.com" .. image] == true then
+      return wget.actions.EXIT
+    end
   end
   
   if status_code >= 500 or

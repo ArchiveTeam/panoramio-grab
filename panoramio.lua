@@ -39,7 +39,8 @@ allowed = function(url)
        and (string.match(url, "^https?://[^/]*panoramio%.com")
         or string.match(url, "^https?://mw2%.google%.com/mw%-panoramio"))
        and not (string.match(url, "/signin/%?referer=")
-        or string.match(url, "/twitter/photo_id")) then
+        or string.match(url, "/twitter/photo_id")
+        or string.match(url, "^https?://[^/]*panoramio%.com/photo/[0-9]+/")) then
       return true
     elseif string.match(url, "^https?://[^/]*panoramio%.com/map/%?place=")
        or string.match(url, "^https?://[^/]*panoramio%.com/kml/%?place=") then
@@ -61,7 +62,8 @@ wget.callbacks.download_child_p = function(urlpos, parent, depth, start_url_pars
        or string.match(url, "^https?://mw2%.google%.com/mw%-panoramio/photos/[^/]+/[0-9]+")
        or string.match(url, "^https?://static%.panoramio%.com%.storage%.googleapis%.com/photos/[^/]+/[0-9]+")
        or string.match(url, "^https?://www%.panoramio%.com/photos/[^/]+/[0-9]+")
-       or string.match(url, "^https?://ssl%.panoramio%.com/photos/[^/]+/[0-9]+")))) then
+       or string.match(url, "^https?://ssl%.panoramio%.com/photos/[^/]+/[0-9]+")
+       or string.match(url, "^https?://[^/]*panoramio%.com/photo/[0-9]+/")))) then
     addedtolist[url] = true
     return true
   else

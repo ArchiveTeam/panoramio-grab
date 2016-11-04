@@ -40,7 +40,9 @@ allowed = function(url)
         or string.match(url, "^https?://mw2%.google%.com/mw%-panoramio"))
        and not (string.match(url, "/signin/%?referer=")
         or string.match(url, "/twitter/photo_id")
-        or string.match(url, "^https?://[^/]*panoramio%.com/photo/[0-9]+/")) then
+        or string.match(url, "^https?://[^/]*panoramio%.com/photo/[0-9]+/$")
+        or string.match(url, "^https?://[^/]*panoramio%.com/user/[0-9]+/$")
+        or string.match(url, "^https?://[^/]*panoramio%.com/user/[0-9]+.*comment_page=[2-9][0-9]*")) then
       return true
     elseif string.match(url, "^https?://[^/]*panoramio%.com/map/%?place=")
        or string.match(url, "^https?://[^/]*panoramio%.com/kml/%?place=") then

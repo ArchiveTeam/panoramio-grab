@@ -58,7 +58,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20161013.01"
+VERSION = "20161104.01"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'panoramio'
 TRACKER_HOST = 'tracker.archiveteam.org'
@@ -196,13 +196,18 @@ class WgetArgs(object):
         item['item_type'] = item_type
         item['item_value'] = item_value
         
-        assert item_type in ('photos')
+        assert item_type in ('photos', 'users')
 
         if item_type == 'photos':
             start, stop = item_value.split('-')
             for i in range(int(start), int(stop)+1):
                 wget_args.extend(['--warc-header', 'panoramio-photo: {i}'.format(**locals())])
                 wget_args.append('http://www.panoramio.com/photo/{i}'.format(**locals()))
+        elif item_type == 'users':
+            start, stop = item_value.split('-')
+            for i in range(int(start), int(stop)+1):
+                wget_args.extend(['--warc-header', 'panoramio-user: {i}'.format(**locals())])
+                wget_args.append('http://www.panoramio.com/user/{i}'.format(**locals()))
         else:
             raise Exception('Unknown item')
         
